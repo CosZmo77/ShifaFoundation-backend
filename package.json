@@ -18,7 +18,8 @@
     "crypto": "^1.0.1",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "nodemailer": "^7.0.3"
+    "nodemailer": "^7.0.3",
+    "razorpay": "^2.9.6"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
