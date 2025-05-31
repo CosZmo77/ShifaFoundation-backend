@@ -8,46 +8,18 @@ const crypto = require("crypto");
 
 dotenv.config();
 const app = express();
-
-// console.log("Debug: Attempting to load Razorpay Keys from .env:");
-// console.log("Debug: RAZORPAY_KEY_ID is set:", !!process.env.RAZORPAY_KEY);
-// // console.log("Debug: RAZORPAY_KEY_ID_VALUE:", process.env.RAZORPAY_KEY); // Uncomment for more detail if needed
-// console.log("Debug: RAZORPAY_SECRET is set:", !!process.env.RAZORPAY_SECRET);
-// // console.log("Debug: RAZORPAY_SECRET_VALUE (first 5 chars):", process.env.RAZORPAY_SECRET ? process.env.RAZORPAY_SECRET.substring(0, 5) : "Not set"); // Uncomment for more detail if needed
 const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(
   cors({
-    origin: [
-      process.env.FRONTEND_URL || "http://localhost:3000",
-      "http://localhost:5173", // Allow requests from the Vite dev server
-    ],
+    origin: "https://shifafoundation-frontend.onrender.com",
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// Validate required environment variables
-// const requiredEnvVars = [
-//   "RAZORPAY_KEY",
-//   "RAZORPAY_SECRET",
-//   "EMAIL_USER",
-//   "EMAIL_PASS",
-// ];
-// const missingVars = requiredEnvVars.filter((varName) => !process.env[varName]);
-
-// if (missingVars.length > 0) {
-//   console.error("Missing required environment variables:", missingVars);
-//   console.error("Please create a .env file with the following variables:");
-//   console.error("RAZORPAY_KEY=your_razorpay_key_id");
-//   console.error("RAZORPAY_SECRET=your_razorpay_secret");
-//   console.error("EMAIL_USER=your_email@gmail.com");
-//   console.error("EMAIL_PASS=your_app_password");
-//   console.error("FRONTEND_URL=http://localhost:3000 (optional)");
-//   process.exit(1);
-// }
 
 // Email transporter
 const transporter = nodemailer.createTransport({
